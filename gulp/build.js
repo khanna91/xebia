@@ -37,22 +37,11 @@ gulp.task('html', ['inject', 'partials'], function () {
 
     return gulp.src(paths.tmp + '/serve/*.html')
     .pipe($.inject(partialsInjectFile, partialsInjectOptions))
-    .pipe($.inject(partialsInjectFile, {
-        starttag: '<!-- inject:gmap -->',
-        endtag: '<!-- endinject -->',
-        transform: function (filepath) {
-            var gsrc = 'https://maps.googleapis.com/maps/api/js?key=' + paths.googleMapKey + '&libraries=places';
-            return '<script src="'+ gsrc +'"></script>';
-        }
-    }))
     .pipe(assets = $.useref.assets())
     .pipe($.rev())
     .pipe(jsFilter)
     .pipe($.ngAnnotate())
     .pipe($.replace('${env}', gulp.env))
-    .pipe($.replace('${mapApiKey}', paths.mapApiKey))
-    .pipe($.replace('${zomatoApiKey}', paths.zomatoApiKey))
-    .pipe($.replace('${googleMapKey}', paths.googleMapKey))
     .pipe($.uglify({preserveComments: $.uglifySaveLicense, mangle: false}))
     .pipe(jsFilter.restore())
     .pipe(cssFilter)
@@ -88,22 +77,11 @@ gulp.task('html-local', ['inject', 'partials'], function () {
 
     return gulp.src(paths.tmp + '/serve/*.html')
     .pipe($.inject(partialsInjectFile, partialsInjectOptions))
-    .pipe($.inject(partialsInjectFile, {
-        starttag: '<!-- inject:gmap -->',
-        endtag: '<!-- endinject -->',
-        transform: function (filepath) {
-            var gsrc = 'https://maps.googleapis.com/maps/api/js?key=' + paths.googleMapKey + '&libraries=places';
-            return '<script src="'+ gsrc +'"></script>';
-        }
-    }))
     .pipe(assets = $.useref.assets())
     .pipe($.rev())
     .pipe(jsFilter)
     .pipe($.ngAnnotate())
     .pipe(jsFilter.restore())
-    .pipe($.replace('${mapApiKey}', paths.mapApiKey))
-    .pipe($.replace('${zomatoApiKey}', paths.zomatoApiKey))
-    .pipe($.replace('${googleMapKey}', paths.googleMapKey))
     .pipe($.replace('${env}', gulp.env))
     .pipe(cssFilter)
     .pipe($.csso())
