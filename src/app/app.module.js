@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('app', [
-        'ui.router', 'ngMessages', 'ngSanitize', 'ngAnimate', 'LocalStorageModule',
+        'ui.router', 'ngSanitize', 'LocalStorageModule',
         // custom modules
         'utils', 'product'
     ]);
