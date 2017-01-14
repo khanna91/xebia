@@ -1,0 +1,62 @@
+<div id="home-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <p class="intro-text">
+                    Welcome to the <strong>Angular Store</strong>. <br/>
+                    Please select the products you want and add them to your shopping cart.<br/>
+                    When you are done, click the shopping cart icon to review your order and check out.
+                </p>
+            </div>
+            <div class="col-xs-12">
+                <div class="search-box">
+                    <form name="searchForm" class="form-horizontal">
+                        <div class="form-group">
+                            <label for="search" class="col-xs-1 control-label">Search</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="search" placeholder="Enter product name to be searched" ng-model="vm.searchText">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-xs-12">
+                <div class="table-responsive product-listing">
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr class="active">
+                                <td colspan="4" class="fs-15 text-right">
+                                    {{ vm.cartCount }} items, <strong>${{vm.cartWorth}}</strong>
+                                </td>
+                            </tr>
+                            <tr ng-repeat="product in vm.products | filter:vm.searchText track by $index">
+                                <td class="text-center">
+                                    <img ng-src="{{product.image}}" alt="{{ product.name }}">
+                                </td>
+                                <td>
+                                    <strong class="cursor" ng-click="vm.viewProductDetail(product)">{{ product.name }}</strong>
+                                    <div ng-bind-html="product.description | ellipse : 150"></div>
+                                </td>
+                                <td class="m-w-100 text-right">
+                                    ${{ product.price }}
+                                </td>
+                                <td class="text-center">
+                                    <button ng-class="{'btn' : true, 'btn-success' : !product.inCart, 'btn-default' : !product.inCart}"
+                                        ng-click="vm.addProductToCart(product, $index)">Add to Cart</button>
+                                </td>
+                            </tr>
+                            <tr class="text-center" ng-hide="vm.products.length">
+                                <td colspan="4">Sorry, seems no more products avaible right now.</td>
+                            </tr>
+                            <tr class="active">
+                                <td colspan="4" class="fs-15 text-right">
+                                    {{ vm.cartCount }} items, <strong>${{vm.cartWorth}}</strong>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

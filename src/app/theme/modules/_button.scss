@@ -1,0 +1,9 @@
+.btn {
+    &:focus {
+        outline : none;
+    }
+}
+
+.btn-meesho {
+    @include button-variant(#FFF, #eb4e85, #e62065);
+}

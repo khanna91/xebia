@@ -1,0 +1,42 @@
+<div id="product-detail">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-1 text-center">
+                <img ng-src="{{vm.product.image}}" alt="vm.product.name">
+            </div>
+            <div class="col-sm-10">
+                <strong class="fs-15">{{ vm.product.name }}</strong> : <span ng-bind-html="vm.product.description"></span>
+            </div>
+        </div>
+        <div class="row m-t-30 m-b-50">
+            <div class="col-sm-8">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <tr class="active">
+                            <td colspan="3" class="fs-15 text-right">
+                                <span ng-if="vm.cartCount">{{ vm.cartCount }}</span> <span ng-if="!vm.cartCount">0</span> items,
+                                <strong>$<span ng-if="vm.cartWorth">{{ vm.cartWorth }}</span> <span ng-if="!vm.cartWorth">0</span></strong>
+                            </td>
+                        </tr>
+                        <tr ng-repeat="meta in vm.product.meta track by $index">
+                            <td class="m-w-100">{{ meta.title }}</td>
+                            <td>{{ meta.number }}</td>
+                            <td ng-bind-html="meta.description"></td>
+                        </tr>
+                        <tr class="active">
+                            <td colspan="4" class="fs-15 text-right">
+                                <span ng-if="vm.cartCount">{{ vm.cartCount }}</span> <span ng-if="!vm.cartCount">0</span> items,
+                                <strong>$<span ng-if="vm.cartWorth">{{ vm.cartWorth }}</span> <span ng-if="!vm.cartWorth">0</span></strong>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <button class="btn btn-block btn-success m-b-10" ng-click="vm.addProductToCart()" ng-hide="vm.product.inCart">Add to Cart</button>
+                <button class="btn btn-block btn-danger m-b-10" ng-click="vm.removeProductFromCart()" ng-show="vm.product.inCart">Remove from Cart</button>
+                <button class="btn btn-block btn-default" ng-click="vm.goToStore()">Go back to Store</button>
+            </div>
+        </div>
+    </div>
+</div>
